@@ -1,0 +1,16 @@
+.title{
+    text-align: center;
+}
+
+.bread {
+    width: 60%;
+    height: 30px;
+    line-height: 30px;
+    margin: 0 auto;
+    padding: 0 15px;
+    border: 1px solid #ccc;
+}
+.bread a{
+    text-decoration: none;
+    color: #24ff;
+}

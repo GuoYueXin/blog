@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的博客</title>
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/blogDetial.css">
+</head>
+<body>
+<header class="header">
+    <div class="header-content">
+        <div class="title">
+            <a href="#">个人博客 | 技术博客</a>
+        </div>
+        <ul class="tags">
+            <li><a href="#">首页</a></li>
+            <li><a href="#">地图</a></li>
+            <li><a href="#">关于</a></li>
+            <li><a href="#">留言</a></li>
+        </ul>
+        <div class="search-box">
+            <input type="text" placeholder="搜索关键词">
+            <span class="search-btn">搜索</span>
+        </div>
+    </div>
+</header>
+<div class="content clearfix">
+    <div class="content-left clearfix">
+        <div class="blog" id="blogDetial">
+            <div class="title">{{title}}</div>
+            <div class="blog-info">
+                作者： 郭月新 发布于：<span>{{time}}</span> 浏览 <span>({{count}})</span>
+            </div>
+            <div class="blog-content" v-html="content"></div>
+        </div>
+        <div class="send-commit">
+            <h3>发表评论</h3>
+            <div class="commit-userInfo">
+                <input type="text" placeholder="昵称" id="username">
+                <input type="text" placeholder="邮箱（评论被回复时你将会收到通知）" id="email">
+            </div>
+            <div class="commit-content">
+                <textarea name="commit" id="commit-content"  placeholder="无意义的内容可能不会收到回复"></textarea>
+            </div>
+            <!--<div class="commit-code">-->
+                <!--<input type="text" placeholder="验证码" id="code">-->
+            <!--</div>-->
+            <div class="commit-btn">
+                <button onclick="confirmCommit()">提交留言</button>
+            </div>
+
+        </div>
+    </div>
+    <div class="content-right clearfix">
+        <div class="right-wrap tags" id="tags">
+            <div class="title">随机标签云</div>
+            <div class="tag-content">
+                <a href="" v-for="item in tags" :style="{color:randomColor(), fontSize:randomSize()}">{{item}}</a>
+            </div>
+        </div>
+        <div class="right-wrap hots">
+            <div class="title">最近热门</div>
+            <div class="hots-content">
+                <div><a href="">查看你的AWS服务器已使用流量</a></div>
+                <div><a href="">python+selenium自动登录qq空间并下载</a></div>
+                <div><a href="">vscode+XDebug调试远程环境(虚拟机</a></div>
+                <div><a href="">VirtualBox压缩vmdk、vagrant打包b</a></div>
+            </div>
+        </div>
+        <div class="right-wrap comments">
+            <div class="title">最新评论</div>
+            <div class="comments-content">
+                <div class="comments-title">
+                    <span class="username">张三</span>
+                    <span class="time">[三周前]</span>
+                </div>
+                <div class="comments-text">
+                    <a href="">踩踩踩</a>
+                </div>
+            </div>
+            <div class="comments-content">
+                <div class="comments-title">
+                    <span class="username">张三</span>
+                    <span class="time">[三周前]</span>
+                </div>
+                <div class="comments-text">
+                    <a href="">踩踩踩</a>
+                </div>
+            </div>
+            <div class="comments-content">
+                <div class="comments-title">
+                    <span class="username">张三</span>
+                    <span class="time">[三周前]</span>
+                </div>
+                <div class="comments-text">
+                    <a href="">踩踩踩</a>
+                </div>
+            </div>
+            <div class="comments-content">
+                <div class="comments-title">
+                    <span class="username">张三</span>
+                    <span class="time">[三周前]</span>
+                </div>
+                <div class="comments-text">
+                    <a href="">踩踩踩</a>
+                </div>
+            </div>
+        </div>
+        <div class="right-wrap">
+            <div class="title">友情链接</div>
+        </div>
+    </div>
+</div>
+<footer>
+    <div class="link">
+        <a href="">html</a><a href="">javascript</a><a href="">python</a><a href="">java</a><a href="">Go</a><a href="">R语言</a><a
+            href="">VUE</a><a href="">react</a><a href="">angular</a>
+    </div>
+</footer>
+<script src="https://cdn.bootcss.com/vue/2.6.3/vue.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="./js/axios.js"></script>
+<script src="./js/blogDetial.js"></script>
+<script src="./js/base.js"></script>
+<script>
+    function confirmCommit() {
+      var blogId = location.search.slice(1).split('=')[1];
+      var username = $('#username').val();
+      var email = $('#email').val();
+      var content = $('#commit-content').val();
+      var params = {
+        blogId,
+        username,
+        email,
+        content,
+        parent: -1,
+      };
+      $.ajax({
+        method: 'post',
+        url: '/addCommit',
+        data: JSON.stringify(params),
+        contentType: 'application/json',
+        success: function () {
+          alert('提交成功');
+        },
+        error: function () {
+          alert('提交失败');
+        }
+      });
+    }
+</script>
+</body>
+</html>
