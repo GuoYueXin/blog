@@ -17,4 +17,4 @@ app.post('/queryTag', loader.get('/queryTag'));
 
 app.post('/addCommit', loader.get('/addCommit'));
 
-app.listen(globalConfig.port);
+app.listen(80);
