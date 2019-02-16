@@ -7,7 +7,7 @@ var pathMap = new Map();
 var files = fs.readdirSync('web');
 
 for (var i = 0, len = files.length; i < len; i ++) {
-  var temp = require('./' + globalConfig['web_path'] + '/' + files[i]);
+  var temp = require('./web/' + files[i]);
   if (temp.path) {
     for (var [key, value] of temp.path) {
       if (pathMap.get(key) == null) {
